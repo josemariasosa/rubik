@@ -63,7 +63,7 @@ The **new table** is:
 
 The **code** is:
 
-```
+```python
 new = rk.changeNaNforEmptyList(original, 'Roles')
 ```
 
