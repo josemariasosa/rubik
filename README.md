@@ -4,7 +4,7 @@ A set of very useful tools for data wrangling and processing that could be used 
 
 ## Test and use rubik
 
-```
+```python
 import rubik as rk
 import pandas as pd
 ```
@@ -15,13 +15,15 @@ This is a list of the functions with very simple examples for it use.
 
 ### 0. The header
 
-```
+```python
 import pandas as pd
 from operator import itemgetter
 pd.set_option('display.max_columns', 20)
 ```
 
 After the Pandas Version 0.23, the used must explicitly specify the number of columns that will be printed in the standard output. When Pandas library is loaded the `set_option` method set the default to 20.
+
+---
 
 ### 1. **changeNaNforEmptyList** function
 
@@ -47,7 +49,7 @@ The **original table** is:
 | 1     | user-452  | [1]       |
 | 2     | user-21   | [5, 2]    |
 | 3     | user-621  | NaN       |
-| 4     | user-5512 | [3,4]     |
+| 4     | user-5512 | [3, 4]    |
 | 5     | user-25   | [1, 2, 3] |
 
 The **new table** is:
@@ -58,7 +60,7 @@ The **new table** is:
 | 1     | user-452  | [1]       |
 | 2     | user-21   | [5, 2]    |
 | 3     | user-621  | [ ]       |
-| 4     | user-5512 | [3,4]     |
+| 4     | user-5512 | [3, 4]    |
 | 5     | user-25   | [1, 2, 3] |
 
 The **code** is:
@@ -66,6 +68,8 @@ The **code** is:
 ```python
 new = rk.changeNaNforEmptyList(original, 'Roles')
 ```
+
+---
 
 ### 2. **concatColsToList** function
 
@@ -83,6 +87,38 @@ column_list     - A List with the column names we are going to work with.
 column_new_name - A String with the column name we are going to create.
 ```
 
+#### 2.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | Role 1 | Role 2 |
+|-------|-----------|--------|--------|
+| 0     | user-123  | 1      | 2      |
+| 1     | user-452  | 1      | 3      |
+| 2     | user-21   | 5      | 2      |
+| 3     | user-621  | 3      | 1      |
+| 4     | user-5512 | 3      | 4      |
+| 5     | user-25   | 1      | 3      |
+
+The **new table** is:
+
+| Entry | Id        | Roles  |
+|-------|-----------|--------|
+| 0     | user-123  | [1, 2] |
+| 1     | user-452  | [1, 3] |
+| 2     | user-21   | [5, 2] |
+| 3     | user-621  | [3, 1] |
+| 4     | user-5512 | [3, 4] |
+| 5     | user-25   | [1, 3] |
+
+The **code** is:
+
+```python
+new = rk.concatColsToList(original, ['Role 1', 'Role 2'], 'Roles')
+```
+
+---
+
 ### 3. **unGroupLists** function
 
 `unGroupLists(data_frame, column_name)`
@@ -97,6 +133,34 @@ data_frame  - The DataFrame we are going to work with.
 column_name - A String with the column name we are going to modify.
 ```
 
+#### 3.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | [1, 2] |
+| 1     | user-452 | [5, 7] |
+| 2     | user-21  | [3]    |
+
+The **new table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 1     |
+| 0     | user-123 | 2     |
+| 1     | user-452 | 5     |
+| 1     | user-452 | 7     |
+| 2     | user-21  | 3     |
+
+The **code** is:
+
+```python
+new = rk.unGroupLists(original, 'Roles')
+```
+
+---
+
 ### 4. **splitDictCol** function
 
 `splitDictCol(data_frame, column_name)`
@@ -110,6 +174,38 @@ data_frame  - The DataFrame we are going to work with.
 
 column_name - A String with the column name we are going to modify.
 ```
+
+#### 4.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | Roles                       |
+|-------|-----------|-----------------------------|
+| 0     | user-123  | {"main": 1, "secondary": 2} |
+| 1     | user-452  | {"main": 3, "secondary": 1} |
+| 2     | user-21   | {"main": 7}                 |
+| 3     | user-621  | {"main": 2, "secondary": 6} |
+| 4     | user-5512 | {"main": 7, "secondary": 5} |
+| 5     | user-25   | {"main": 3}                 |
+
+The **new table** is:
+
+| Entry | Id        | main | secondary |
+|-------|-----------|------|-----------|
+| 0     | user-123  | 1    | 2         |
+| 1     | user-452  | 3    | 1         |
+| 2     | user-21   | 7    | NaN       |
+| 3     | user-621  | 2    | 6         |
+| 4     | user-5512 | 7    | 5         |
+| 5     | user-25   | 3    | NaN       |
+
+The **code** is:
+
+```python
+new = rk.splitDictCol(original, 'Roles')
+```
+
+---
 
 ### 5. **groupToList** function
 
