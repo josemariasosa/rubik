@@ -37,6 +37,36 @@ data_frame  - The DataFrame we are going to work with.
 column_name - A String with the column name we are going to modify.
 ```
 
+#### 1.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | Roles     |
+|-------|-----------|-----------|
+| 0     | user-123  | NaN       |
+| 1     | user-452  | [1]       |
+| 2     | user-21   | [5, 2]    |
+| 3     | user-621  | NaN       |
+| 4     | user-5512 | [3,4]     |
+| 5     | user-25   | [1, 2, 3] |
+
+The **new table** is:
+
+| Entry | Id        | Roles     |
+|-------|-----------|-----------|
+| 0     | user-123  | [ ]       |
+| 1     | user-452  | [1]       |
+| 2     | user-21   | [5, 2]    |
+| 3     | user-621  | [ ]       |
+| 4     | user-5512 | [3,4]     |
+| 5     | user-25   | [1, 2, 3] |
+
+The **code** is:
+
+```
+new = rk.changeNaNforEmptyList(original, 'Roles')
+```
+
 ### 2. **concatColsToList** function
 
 `concatColsToList(data_frame, column_list, column_new_name)`
