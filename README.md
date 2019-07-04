@@ -218,10 +218,38 @@ Group a variable (column_name) in to a single list in regards of agroup of varia
 ```
 data_frame  - The DataFrame we are going to work with.
 
-column_list - A List with the column names we are going to work with.
+column_list - A List with the column names we are going to work with as pivot columns.
 
 column_name - A String with the column name we are going to modify.
 ```
+
+#### 5.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 1     |
+| 0     | user-123 | 2     |
+| 1     | user-452 | 5     |
+| 1     | user-452 | 7     |
+| 2     | user-21  | 3     |
+
+The **new table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | [1, 2] |
+| 1     | user-452 | [5, 7] |
+| 2     | user-21  | [3]    |
+
+The **code** is:
+
+```python
+new = rk.groupToList(original, ['Entry', 'Id'], 'Roles')
+```
+
+---
 
 ### 6. **groupToTuple** function
 
@@ -234,10 +262,38 @@ Group a variable (column_name) in to a tuple in regards of a group of variables 
 ```
 data_frame  - The DataFrame we are going to work with.
 
-column_list - A List with the column names we are going to work with.
+column_list - A List with the column names we are going to work with as pivot columns.
 
 column_name - A String with the column name we are going to modify.
 ```
+
+#### 6.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 1     |
+| 0     | user-123 | 2     |
+| 1     | user-452 | 5     |
+| 1     | user-452 | 7     |
+| 2     | user-21  | 3     |
+
+The **new table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | (1, 2) |
+| 1     | user-452 | (5, 7) |
+| 2     | user-21  | (3, )  |
+
+The **code** is:
+
+```python
+new = rk.groupToTuple(original, ['Entry', 'Id'], 'Roles')
+```
+
+---
 
 ### 7. **groupToSortedTuple** function
 
@@ -257,6 +313,34 @@ column_name - A String with the column name we are going to modify.
 n           - An integer with the index of the sorting value (default n = 0).
 ```
 
+#### 7.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 2     |
+| 0     | user-123 | 1     |
+| 1     | user-452 | 7     |
+| 1     | user-452 | 5     |
+| 2     | user-21  | 3     |
+
+The **new table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | (1, 2) |
+| 1     | user-452 | (5, 7) |
+| 2     | user-21  | (3, )  |
+
+The **code** is:
+
+```python
+new = rk.groupToSortedTuple(original, ['Entry', 'Id'], 'Roles')
+```
+
+---
+
 ### 8. **groupToDict** function
 
 `groupToDict(data_frame, column_list, column_new_name)`
@@ -273,11 +357,45 @@ column_list     - A List with the column names we are going to work with.
 column_new_name - A String with the column name we are going to create.
 ```
 
+#### 8.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | main | secondary |
+|-------|-----------|------|-----------|
+| 0     | user-123  | 1    | 2         |
+| 1     | user-452  | 3    | 1         |
+| 2     | user-21   | 7    | 3         |
+| 3     | user-621  | 2    | 6         |
+| 4     | user-5512 | 7    | 5         |
+| 5     | user-25   | 3    | 3         |
+
+The **new table** is:
+
+| Entry | Id        | Roles                       |
+|-------|-----------|-----------------------------|
+| 0     | user-123  | {"main": 1, "secondary": 2} |
+| 1     | user-452  | {"main": 3, "secondary": 1} |
+| 2     | user-21   | {"main": 7, "secondary": 3} |
+| 3     | user-621  | {"main": 2, "secondary": 6} |
+| 4     | user-5512 | {"main": 7, "secondary": 5} |
+| 5     | user-25   | {"main": 3, "secondary": 3} |
+
+The **code** is:
+
+```python
+new = rk.groupToDict(original, ['main', 'secondary'], 'Roles')
+```
+
+---
+
 ### 9. **groupToSet** function
 
 `groupToSet(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a single set in regards of a group of variables (column_list).
+
+**The returned object type is List, not an actual set.**
 
 #### 9.1 Arguments:
 
@@ -289,11 +407,41 @@ column_list - A List with the column names we are going to work with.
 column_name - A String with the column name we are going to modify.
 ```
 
+#### 9.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 2     |
+| 0     | user-123 | 1     |
+| 1     | user-452 | 7     |
+| 1     | user-452 | 7     |
+| 2     | user-21  | 3     |
+
+The **new table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | [2, 1] |
+| 1     | user-452 | [7]    |
+| 2     | user-21  | [3]    |
+
+The **code** is:
+
+```python
+new = rk.groupToSet(original, ['Entry', 'Id'], 'Roles')
+```
+
+---
+
 ### 10. **groupToSortedSet** function
 
 `groupToSortedSet(data_frame, column_list, column_name)`
 
 Group a variable (column_name) into a sorted set in regards of a group of variables (column_list).
+
+**The returned object type is List, not an actual set.**
 
 #### 10.1 Arguments:
 
@@ -304,6 +452,34 @@ column_list - A List with the column names we are going to work with.
 
 column_name - A String with the column name we are going to modify.
 ```
+
+#### 10.2 Example:
+
+The **original table** is:
+
+| Entry | Id       | Roles |
+|-------|----------|-------|
+| 0     | user-123 | 2     |
+| 0     | user-123 | 1     |
+| 1     | user-452 | 7     |
+| 1     | user-452 | 7     |
+| 2     | user-21  | 3     |
+
+The **new table** is:
+
+| Entry | Id       | Roles  |
+|-------|----------|--------|
+| 0     | user-123 | [1, 2] |
+| 1     | user-452 | [7]    |
+| 2     | user-21  | [3]    |
+
+The **code** is:
+
+```python
+new = rk.groupToSortedSet(original, ['Entry', 'Id'], 'Roles')
+```
+
+---
 
 ### 11. **combineListColumns** function
 
@@ -323,11 +499,45 @@ column_name_2 - A String with the column name we are going to modify.
 column_new_name - A String with the column name we are going to create.
 ```
 
+#### 11.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | Roles1 | Roles2 |
+|-------|-----------|--------|--------|
+| 0     | user-123  | [1, 2] | [ ]    |
+| 1     | user-452  | [3, 1] | [2]    |
+| 2     | user-21   | [7]    | [5, 4] |
+| 3     | user-621  | [2, 6] | [ ]    |
+| 4     | user-5512 | [7, 5] | [1]    |
+| 5     | user-25   | [3]    | [4, 5] |
+
+The **new table** is:
+
+| Entry | Id        | Roles    |
+|-------|-----------|-----------|
+| 0     | user-123  | [1, 2]    |
+| 1     | user-452  | [3, 1, 2] |
+| 2     | user-21   | [7, 5, 4] |
+| 3     | user-621  | [2, 6]    |
+| 4     | user-5512 | [7, 5, 1] |
+| 5     | user-25   | [3, 4, 5] |
+
+The **code** is:
+
+```python
+new = rk.combineListColumns(original, 'Roles1', 'Roles2', 'Roles')
+```
+
+---
+
 ### 12. **table** function
 
 `table(_list)`
 
 This function works like table() in R. It returns a data frame with the frequency of the elements in a given list.
+
+The response is a Pandas DataFrame.
 
 #### 12.1 Arguments:
 
@@ -335,11 +545,36 @@ This function works like table() in R. It returns a data frame with the frequenc
 _list  - The List we are going to work with.
 ```
 
+#### 12.2 Example:
+
+The **original list** is:
+
+`[100, 103, 555, 102, 100, 100, 100, 102, 103, 103]`
+
+The **new table** is:
+
+| value | freq |
+|-------|------|
+| 100   | 4    |
+| 103   | 3    |
+| 102   | 2    |
+| 555   | 1    |
+
+The **code** is:
+
+```python
+original = [100, 103, 555, 102, 100, 100, 100, 102, 103, 103]
+
+new = rk.table(original)
+```
+
+---
+
 ### 13. **flattenList** function
 
 `flattenList(_list)`
 
-Flatten a list with nested lists (e.g. [100,[103, [555]]], 102] = [100, 103, 555, 102])
+Flatten a list with nested lists.
 
 #### 13.1 Arguments:
 
@@ -347,11 +582,34 @@ Flatten a list with nested lists (e.g. [100,[103, [555]]], 102] = [100, 103, 555
 _list  - The List we are going to work with.
 ```
 
+#### 13.2 Example:
+
+The **original list** is:
+
+`[[100,[103, [555]]], 102]`
+
+The **new list** is:
+
+`[100, 103, 555, 102]`
+
+The **code** is:
+
+```python
+original = [[100,[103, [555]]], 102]
+
+new = rk.flattenList(original)
+
+print(new)
+# [100, 103, 555, 102]
+```
+
+---
+
 ### 14. **chunkify** function
 
 `chunkify(chunk_this_list, chunk_size)`
 
-Flatten a list with nested lists (e.g. [100,[103, [555]]], 102] = [100, 103, 555, 102])
+Create smaller chunks in the same list.
 
 #### 14.1 Arguments:
 
@@ -361,9 +619,33 @@ chunk_this_list  - The List we are going to work with.
 chunk_size       - An integer with the number of elements in a chunk.
 ```
 
+#### 14.2 Example:
+
+The **original list** is:
+
+`[100, 103, 555, 102, 100, 100, 100, 102, 103]`
+
+The **new list** is:
+
+`[[100, 103], [555, 102], [100, 100], [100, 102], [103]]`
+
+The **code** is:
+
+```python
+original = [100, 103, 555, 102, 100, 100, 100, 102, 103, 103]
+
+new = rk.chunkify(original, 2)
+
+print(new)
+# [[100, 103], [555, 102], [100, 100], [100, 102], [103]]
+```
+
+---
+
+
 ## Versions:
 
-- version - 1.3.1. *'Just a little bit higher, not too much.'*
+- version - 1.3.1. *'Just a little bit higher. Not too much.'*
 
     1. Standardizing names and the format.
 

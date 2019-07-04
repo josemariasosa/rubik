@@ -286,7 +286,7 @@ def chunkify(chunk_this_list, chunk_size):
 
 # Versions:
 
-    """ version - 1.3.1. 'Just a little bit higher, not too much.'
+    """ version - 1.3.1. 'Just a little bit higher. Not too much.'
 
             1. Standardizing names and the format.
 
