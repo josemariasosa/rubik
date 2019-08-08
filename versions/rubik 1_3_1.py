@@ -2,12 +2,10 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 1.3.2: Aug-08-2019
+# Version 1.3.1: Jul-04-2019
 
 import pandas as pd
 from operator import itemgetter
-pd.set_option('display.min_rows', 30)
-pd.set_option('display.max_rows', 60)
 pd.set_option('display.max_columns', 20)
 
 
@@ -288,14 +286,7 @@ def chunkify(chunk_this_list, chunk_size):
 
 # Versions:
 
-    """ version - 1.3.2. 'New job. New opportunities.'
-
-            1. Displaying a DataFrame in the standard output in a pretty way.
-                - Once the display.max_rows is exceeded, the display.min_rows
-                  options determines how many rows are shown in the truncated
-                  repr.
-
-        version - 1.3.1. 'Just a little bit higher. Not too much.'
+    """ version - 1.3.1. 'Just a little bit higher. Not too much.'
 
             1. Standardizing names and the format.
 
@@ -306,3 +297,4 @@ def chunkify(chunk_this_list, chunk_size):
 
             2. Adding the chunkify function.
     """ 
+
