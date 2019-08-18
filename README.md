@@ -24,7 +24,7 @@ Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik
 
 ## Test and use rubik
 
-### Install Rubik
+### Install rubik
 
 To install rubik from the terminal, first create a virtual environment `venv`, then use the `pip install` command:
 
@@ -34,6 +34,19 @@ source venv/bin/activate
 
 pip install git+https://github.com/josemariasosa/rubik
 ```
+
+### Check version
+
+To make sure the installation was correct, check Rubik's version using the following command from the terminal:
+
+```bash
+python -c 'import rubik; print(rubik.__version__)'
+# 2.0.0
+```
+
+### Use rubik in your scripts
+
+Import the module using the `rk` alias for rubik.
 
 ```python
 import rubik as rk
