@@ -4,7 +4,6 @@ A set of very useful tools for data wrangling and data processing that could be 
 
 ## List of Content
 
-0. [The header](https://github.com/josemariasosa/rubik#test-and-use-rubik)
 1. [The rk.fillna_empty_list Function](https://github.com/josemariasosa/rubik#1-the-rkfillna_empty_list-function)
 2. [The rk.concat_to_list Function](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function)
 3. [The rk.ungroup_list Function](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function)
@@ -716,4 +715,4 @@ Get the code of the last version [here](https://github.com/josemariasosa/rubik/b
 
     2. Adding the chunkify function.
 
-- version - 0. *I am not the original one, but I'm old, thought.*
+- version - 0. *'I am not the original one, but I'm old, thought.'*
