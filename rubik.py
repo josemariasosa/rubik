@@ -109,7 +109,7 @@ def groupto_sorted_tuple(data_frame, column_list, column_name, n=0):
     """Group a variable (column_name) in to a single tuple in regards of a
     group of variables (column_list).
     Sort a list of tuples by first, second, or n element."""
-    aux_fun = lamda x: tuple(sorted(x, key=itemgetter(n)))
+    aux_fun = lambda x: tuple(sorted(x, key=itemgetter(n)))
     return (data_frame.groupby(column_list)[column_name]
                       .apply(lambda x: aux_fun(x.tolist()))
                       .rename(column_name)
