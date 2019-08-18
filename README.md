@@ -1,6 +1,6 @@
 # rubik
 
-A set of very useful tools for data wrangling and processing that could be used with the Python library Pandas. This tools allows the user to give to a Pandas DataFrame any kind of complex structured, being able to arrange columns and rows as if they were part of a Rubik's cube.
+A set of very useful tools for data wrangling and data processing that could be used with the Python library Pandas. This tools allows the user to give to a Pandas DataFrame any kind of complex structure, being able to arrange columns and rows as if they were part of a Rubik's cube.
 
 Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik/rubik.py).
 
@@ -20,6 +20,8 @@ This is a list of the functions with very simple examples for it use.
 ```python
 import pandas as pd
 from operator import itemgetter
+pd.set_option('display.min_rows', 30)
+pd.set_option('display.max_rows', 60)
 pd.set_option('display.max_columns', 20)
 ```
 
@@ -27,9 +29,9 @@ After the Pandas Version 0.23, the used must explicitly specify the number of co
 
 ---
 
-### 1. **changeNaNforEmptyList** function
+### 1. **fillna_empty_list** function
 
-`changeNaNforEmptyList(data_frame, column_name)`
+`fillna_empty_list(data_frame, column_name)`
 
 From any column in a DataFrame, replace the NaN values with empty lists.
 
@@ -68,14 +70,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.changeNaNforEmptyList(original, 'Roles')
+new = rk.fillna_empty_list(original, 'Roles')
 ```
 
 ---
 
-### 2. **concatColsToList** function
+### 2. **concat_to_list** function
 
-`concatColsToList(data_frame, column_list, column_new_name)`
+`concat_to_list(data_frame, column_list, column_new_name)`
 
 Concatenate multiple columns of a data frame into a single list.
 
@@ -116,14 +118,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.concatColsToList(original, ['Role 1', 'Role 2'], 'Roles')
+new = rk.concat_to_list(original, ['Role 1', 'Role 2'], 'Roles')
 ```
 
 ---
 
-### 3. **unGroupLists** function
+### 3. **ungroup_list** function
 
-`unGroupLists(data_frame, column_name)`
+`ungroup_list(data_frame, column_name)`
 
 This function unnest a 'Series of Lists' in a Pandas data frame.
 
@@ -158,14 +160,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.unGroupLists(original, 'Roles')
+new = rk.ungroup_list(original, 'Roles')
 ```
 
 ---
 
-### 4. **splitDictCol** function
+### 4. **ungroup_dict** function
 
-`splitDictCol(data_frame, column_name)`
+`ungroup_dict(data_frame, column_name)`
 
 This function flatten a data frame with dictionaries in a column.
 
@@ -204,14 +206,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.splitDictCol(original, 'Roles')
+new = rk.ungroup_dict(original, 'Roles')
 ```
 
 ---
 
-### 5. **groupToList** function
+### 5. **groupto_list** function
 
-`groupToList(data_frame, column_list, column_name)`
+`groupto_list(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a single list in regards of agroup of variables (column_list).
 
@@ -248,14 +250,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToList(original, ['Entry', 'Id'], 'Roles')
+new = rk.groupto_list(original, ['Entry', 'Id'], 'Roles')
 ```
 
 ---
 
-### 6. **groupToTuple** function
+### 6. **groupto_tuple** function
 
-`groupToTuple(data_frame, column_list, column_name)`
+`groupto_tuple(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a tuple in regards of a group of variables (column_list).
 
@@ -292,14 +294,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToTuple(original, ['Entry', 'Id'], 'Roles')
+new = rk.groupto_tuple(original, ['Entry', 'Id'], 'Roles')
 ```
 
 ---
 
-### 7. **groupToSortedTuple** function
+### 7. **groupto_sorted_tuple** function
 
-`groupToSortedTuple(data_frame, column_list, column_name, n=0)`
+`groupto_sorted_tuple(data_frame, column_list, column_name, n=0)`
 
 Group a variable (column_name) in to a single tuple in regards of a group of variables (column_list). Sort a list of tuples by the first, second, or n-1 element.
 
@@ -338,14 +340,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToSortedTuple(original, ['Entry', 'Id'], 'Roles')
+new = rk.groupto_sorted_tuple(original, ['Entry', 'Id'], 'Roles')
 ```
 
 ---
 
-### 8. **groupToDict** function
+### 8. **groupto_dict** function
 
-`groupToDict(data_frame, column_list, column_new_name)`
+`groupto_dict(data_frame, column_list, column_new_name)`
 
 Generate new column with dictionaries having values of othe columns.
 
@@ -386,14 +388,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToDict(original, ['main', 'secondary'], 'Roles')
+new = rk.groupto_dict(original, ['main', 'secondary'], 'Roles')
 ```
 
 ---
 
-### 9. **groupToSet** function
+### 9. **groupto_set** function
 
-`groupToSet(data_frame, column_list, column_name)`
+`groupto_set(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a single set in regards of a group of variables (column_list).
 
@@ -432,14 +434,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToSet(original, ['Entry', 'Id'], 'Roles')
+new = rk.groupto_set(original, ['Entry', 'Id'], 'Roles')
 ```
 
 ---
 
-### 10. **groupToSortedSet** function
+### 10. **groupto_sorted_set** function
 
-`groupToSortedSet(data_frame, column_list, column_name)`
+`groupto_sorted_set(data_frame, column_list, column_name)`
 
 Group a variable (column_name) into a sorted set in regards of a group of variables (column_list).
 
@@ -478,14 +480,14 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.groupToSortedSet(original, ['Entry', 'Id'], 'Roles')
+new = rk.groupto_sorted_set(original, ['Entry', 'Id'], 'Roles')
 ```
 
 ---
 
-### 11. **combineListColumns** function
+### 11. **expand_column_list** function
 
-`combineListColumns(data_frame, column_name_1, column_name_2, column_new_name)`
+`expand_column_list(data_frame, col_name_1, col_name_2, col_new_name)`
 
 Expand 2 Pandas Series with every element being lists into a single column with lists.
 
@@ -494,11 +496,11 @@ Expand 2 Pandas Series with every element being lists into a single column with 
 ```
 data_frame  - The DataFrame we are going to work with.
 
-column_name_1 - A String with the column name we are going to modify.
+col_name_1 - A String with the column name we are going to modify.
 
-column_name_2 - A String with the column name we are going to modify.
+col_name_2 - A String with the column name we are going to modify.
 
-column_new_name - A String with the column name we are going to create.
+col_new_name - A String with the column name we are going to create.
 ```
 
 #### 11.2 Example:
@@ -528,7 +530,7 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.combineListColumns(original, 'Roles1', 'Roles2', 'Roles')
+new = rk.expand_column_list(original, 'Roles1', 'Roles2', 'Roles')
 ```
 
 ---
@@ -572,9 +574,9 @@ new = rk.table(original)
 
 ---
 
-### 13. **flattenList** function
+### 13. **flat_list** function
 
-`flattenList(_list)`
+`flat_list(_list)`
 
 Flatten a list with nested lists.
 
@@ -599,7 +601,7 @@ The **code** is:
 ```python
 original = [[100,[103, [555]]], 102]
 
-new = rk.flattenList(original)
+new = rk.flat_list(original)
 
 print(new)
 # [100, 103, 555, 102]
@@ -648,14 +650,28 @@ Get the code of the last version [here](https://github.com/josemariasosa/rubik/b
 
 ## Versions:
 
+- version - 2.0. *'PyCon Latam 2019 - Puerto Vallarta.'*
+
+    1. New function names. Again! In compliance with PEP8.
+    2. Create the rubik Package for git.
+    3. pip install git+https://github.com/josemariasosa/rubik
+
+- version - 1.3.2. *'New job. New opportunities.'*
+
+    1. Displaying a DataFrame in the standard output in a pretty way.
+        - Once the display.max_rows is exceeded, the display.min_rows
+        options determines how many rows are shown in the truncated
+        repr.
+
 - version - 1.3.1. *'Just a little bit higher. Not too much.'*
 
     1. Standardizing names and the format.
 
-- version 1.3 *'I should not be high in classes.'*
-        
-    1. Improvements in the flatDict.
-            Avoid crashing names with the dictionary keys.
+- version - 1.3. *'I should not be high in classes.'*
+            
+	1. Improvements in the flatDict function.
+        - Avoid crashing names with the dictionary keys.
+
     2. Adding the chunkify function.
 
-- version 0 *I am not the original one, but I'm old, thought.*
+- version - 0. *I am not the original one, but I'm old, thought.*
