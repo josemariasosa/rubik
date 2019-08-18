@@ -24,6 +24,17 @@ Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik
 
 ## Test and use rubik
 
+### Install Rubik
+
+To install rubik from the terminal, first create a virtual environment `venv`, then use the `pip install` command:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+pip install git+https://github.com/josemariasosa/rubik
+```
+
 ```python
 import rubik as rk
 import pandas as pd

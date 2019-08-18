@@ -4,6 +4,8 @@
 # This is Rubik for Pandas, by josé maría.
 # Version 2.0.0: Aug-18-2019
 
+__version__ = '2.0.0'
+
 import pandas as pd
 from operator import itemgetter
 pd.set_option('display.min_rows', 30)
