@@ -2,6 +2,24 @@
 
 A set of very useful tools for data wrangling and data processing that could be used with the Python library Pandas. This tools allows the user to give to a Pandas DataFrame any kind of complex structure, being able to arrange columns and rows as if they were part of a Rubik's cube.
 
+## List of Content
+
+0. [The header](https://github.com/josemariasosa/rubik#test-and-use-rubik)
+1. [The rk.fillna_empty_list Function](https://github.com/josemariasosa/rubik#1-the-rkfillna_empty_list-function)
+2. [The rk.concat_to_list Function](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function)
+3. [The rk.ungroup_list Function](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function)
+4. [The rk.ungroup_dict Function](https://github.com/josemariasosa/rubik#4-the-rkungroup_dict-function)
+5. [The rk.groupto_list Function](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function)
+6. [The rk.groupto_tuple Function](https://github.com/josemariasosa/rubik#6-the-rkgroupto_tuple-function)
+7. [The rk.groupto_sorted_tuple Function](https://github.com/josemariasosa/rubik#7-the-rkgroupto_sorted_tuple-function)
+8. [The rk.groupto_dict Function](https://github.com/josemariasosa/rubik#8-the-rkgroupto_dict-function)
+9. [The rk.groupto_set Function](https://github.com/josemariasosa/rubik#9-the-rkgroupto_set-function)
+10. [The rk.groupto_sorted_set Function](https://github.com/josemariasosa/rubik#10-the-rkgroupto_sorted_set-function)
+11. [The rk.expand_column_list Function](https://github.com/josemariasosa/rubik#11-the-rkexpand_column_list-function)
+12. [The rk.table Function](https://github.com/josemariasosa/rubik#12-the-rktable-function)
+13. [The rk.flat_list Function](https://github.com/josemariasosa/rubik#13-the-rkflat_list-function)
+14. [The rk.chunkify Function](https://github.com/josemariasosa/rubik#14-the-rkchunkify-function)
+
 Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik/rubik.py).
 
 ## Test and use rubik
