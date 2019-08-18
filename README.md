@@ -29,9 +29,9 @@ After the Pandas Version 0.23, the used must explicitly specify the number of co
 
 ---
 
-### 1. **fillna_empty_list** function
+### 1. The `rk.fillna_empty_list` Function
 
-`fillna_empty_list(data_frame, column_name)`
+`rk.fillna_empty_list(data_frame, column_name)`
 
 From any column in a DataFrame, replace the NaN values with empty lists.
 
@@ -75,9 +75,9 @@ new = rk.fillna_empty_list(original, 'Roles')
 
 ---
 
-### 2. **concat_to_list** function
+### 2. The `rk.concat_to_list` Function
 
-`concat_to_list(data_frame, column_list, column_new_name)`
+`rk.concat_to_list(data_frame, column_list, column_new_name)`
 
 Concatenate multiple columns of a data frame into a single list.
 
@@ -123,9 +123,9 @@ new = rk.concat_to_list(original, ['Role 1', 'Role 2'], 'Roles')
 
 ---
 
-### 3. **ungroup_list** function
+### 3. The `rk.ungroup_list` Function
 
-`ungroup_list(data_frame, column_name)`
+`rk.ungroup_list(data_frame, column_name)`
 
 This function unnest a 'Series of Lists' in a Pandas data frame.
 
@@ -165,9 +165,9 @@ new = rk.ungroup_list(original, 'Roles')
 
 ---
 
-### 4. **ungroup_dict** function
+### 4. The `rk.ungroup_dict` Function
 
-`ungroup_dict(data_frame, column_name)`
+`rk.ungroup_dict(data_frame, column_name)`
 
 This function flatten a data frame with dictionaries in a column.
 
@@ -211,9 +211,9 @@ new = rk.ungroup_dict(original, 'Roles')
 
 ---
 
-### 5. **groupto_list** function
+### 5. The `rk.groupto_list` Function
 
-`groupto_list(data_frame, column_list, column_name)`
+`rk.groupto_list(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a single list in regards of agroup of variables (column_list).
 
@@ -255,9 +255,9 @@ new = rk.groupto_list(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 6. **groupto_tuple** function
+### 6. The `rk.groupto_tuple` Function
 
-`groupto_tuple(data_frame, column_list, column_name)`
+`rk.groupto_tuple(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a tuple in regards of a group of variables (column_list).
 
@@ -299,9 +299,9 @@ new = rk.groupto_tuple(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 7. **groupto_sorted_tuple** function
+### 7. The `rk.groupto_sorted_tuple` Function
 
-`groupto_sorted_tuple(data_frame, column_list, column_name, n=0)`
+`rk.groupto_sorted_tuple(data_frame, column_list, column_name, n=0)`
 
 Group a variable (column_name) in to a single tuple in regards of a group of variables (column_list). Sort a list of tuples by the first, second, or n-1 element.
 
@@ -345,9 +345,9 @@ new = rk.groupto_sorted_tuple(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 8. **groupto_dict** function
+### 8. The `rk.groupto_dict` Function
 
-`groupto_dict(data_frame, column_list, column_new_name)`
+`rk.groupto_dict(data_frame, column_list, column_new_name)`
 
 Generate new column with dictionaries having values of othe columns.
 
@@ -393,9 +393,9 @@ new = rk.groupto_dict(original, ['main', 'secondary'], 'Roles')
 
 ---
 
-### 9. **groupto_set** function
+### 9. The `rk.groupto_set` Function
 
-`groupto_set(data_frame, column_list, column_name)`
+`rk.groupto_set(data_frame, column_list, column_name)`
 
 Group a variable (column_name) in to a single set in regards of a group of variables (column_list).
 
@@ -439,9 +439,9 @@ new = rk.groupto_set(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 10. **groupto_sorted_set** function
+### 10. The `rk.groupto_sorted_set` Function
 
-`groupto_sorted_set(data_frame, column_list, column_name)`
+`rk.groupto_sorted_set(data_frame, column_list, column_name)`
 
 Group a variable (column_name) into a sorted set in regards of a group of variables (column_list).
 
@@ -485,9 +485,9 @@ new = rk.groupto_sorted_set(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 11. **expand_column_list** function
+### 11. The `rk.expand_column_list` Function
 
-`expand_column_list(data_frame, col_name_1, col_name_2, col_new_name)`
+`rk.expand_column_list(data_frame, col_name_1, col_name_2, col_new_name)`
 
 Expand 2 Pandas Series with every element being lists into a single column with lists.
 
@@ -535,9 +535,9 @@ new = rk.expand_column_list(original, 'Roles1', 'Roles2', 'Roles')
 
 ---
 
-### 12. **table** function
+### 12. The `rk.table` Function
 
-`table(_list)`
+`rk.table(_list)`
 
 This function works like table() in R. It returns a data frame with the frequency of the elements in a given list.
 
@@ -574,9 +574,9 @@ new = rk.table(original)
 
 ---
 
-### 13. **flat_list** function
+### 13. The `rk.flat_list` Function
 
-`flat_list(_list)`
+`rk.flat_list(_list)`
 
 Flatten a list with nested lists.
 
@@ -609,9 +609,9 @@ print(new)
 
 ---
 
-### 14. **chunkify** function
+### 14. The `rk.chunkify` Function
 
-`chunkify(chunk_this_list, chunk_size)`
+`rk.chunkify(chunk_this_list, chunk_size)`
 
 Create smaller chunks in the same list.
 
