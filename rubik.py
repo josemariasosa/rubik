@@ -13,7 +13,7 @@ pd.set_option('display.max_rows', 60)
 pd.set_option('display.max_columns', 20)
 
 
-def fillna_empty_list(data_frame, column_name):
+def fillna_list(data_frame, column_name):
     """From any column in a DataFrame, replace the NaN values with empty 
     lists."""
     g_fun = lambda x: []
@@ -184,7 +184,7 @@ def flat_list(_list):
 
 # ------------------------------------------------------------------------------
 
-def expand_column_list(data_frame, col_name_1, col_name_2, col_new_name):
+def extend_column(data_frame, col_name_1, col_name_2, col_new_name):
     data_frame = data_frame.to_dict(orient='records')
     for e in data_frame:
         if not isinstance(e[col_name_1], list):

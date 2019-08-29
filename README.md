@@ -4,22 +4,22 @@ A set of very useful tools for data wrangling and data processing that could be 
 
 ## List of Content
 
-1. [The rk.fillna_empty_list Function](https://github.com/josemariasosa/rubik#1-the-rkfillna_empty_list-function)
-2. [The rk.concat_to_list Function](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function)
-3. [The rk.ungroup_list Function](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function)
-4. [The rk.ungroup_dict Function](https://github.com/josemariasosa/rubik#4-the-rkungroup_dict-function)
-5. [The rk.groupto_list Function](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function)
-6. [The rk.groupto_tuple Function](https://github.com/josemariasosa/rubik#6-the-rkgroupto_tuple-function)
-7. [The rk.groupto_sorted_tuple Function](https://github.com/josemariasosa/rubik#7-the-rkgroupto_sorted_tuple-function)
-8. [The rk.groupto_dict Function](https://github.com/josemariasosa/rubik#8-the-rkgroupto_dict-function)
-9. [The rk.groupto_set Function](https://github.com/josemariasosa/rubik#9-the-rkgroupto_set-function)
-10. [The rk.groupto_sorted_set Function](https://github.com/josemariasosa/rubik#10-the-rkgroupto_sorted_set-function)
-11. [The rk.expand_column_list Function](https://github.com/josemariasosa/rubik#11-the-rkexpand_column_list-function)
-12. [The rk.table Function](https://github.com/josemariasosa/rubik#12-the-rktable-function)
-13. [The rk.flat_list Function](https://github.com/josemariasosa/rubik#13-the-rkflat_list-function)
-14. [The rk.chunkify Function](https://github.com/josemariasosa/rubik#14-the-rkchunkify-function)
+1. [**fillna_list()**](https://github.com/josemariasosa/rubik#1-the-rkfillna_list-function)
+2. [**concat_to_list()**](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function)
+3. [**ungroup_list()**](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function)
+4. [**ungroup_dict()**](https://github.com/josemariasosa/rubik#4-the-rkungroup_dict-function)
+5. [**groupto_list()**](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function)
+6. [**groupto_tuple()**](https://github.com/josemariasosa/rubik#6-the-rkgroupto_tuple-function)
+7. [**groupto_sorted_tuple()**](https://github.com/josemariasosa/rubik#7-the-rkgroupto_sorted_tuple-function)
+8. [**groupto_dict()**](https://github.com/josemariasosa/rubik#8-the-rkgroupto_dict-function)
+9. [**groupto_set()**](https://github.com/josemariasosa/rubik#9-the-rkgroupto_set-function)
+10. [**groupto_sorted_set()**](https://github.com/josemariasosa/rubik#10-the-rkgroupto_sorted_set-function)
+11. [**extend_column()**](https://github.com/josemariasosa/rubik#11-the-rkextend_column-function)
+12. [**table()**](https://github.com/josemariasosa/rubik#12-the-rktable-function)
+13. [**flat_list()**](https://github.com/josemariasosa/rubik#13-the-rkflat_list-function)
+14. [**chunkify()**](https://github.com/josemariasosa/rubik#14-the-rkchunkify-function)
 
-Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik/rubik.py).
+Visit rubik code [here](https://github.com/josemariasosa/rubik/blob/master/rubik.py).
 
 ## Test and use rubik
 
@@ -70,9 +70,9 @@ After the Pandas Version 0.23, the used must explicitly specify the number of co
 
 ---
 
-### 1. The `rk.fillna_empty_list` Function
+### 1. The `rk.fillna_list` Function
 
-`rk.fillna_empty_list(data_frame, column_name)`
+`rk.fillna_list(data_frame, column_name)`
 
 From any column in a DataFrame, replace the NaN values with empty lists.
 
@@ -111,7 +111,7 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.fillna_empty_list(original, 'Roles')
+new = rk.fillna_list(original, 'Roles')
 ```
 
 ---
@@ -526,9 +526,9 @@ new = rk.groupto_sorted_set(original, ['Entry', 'Id'], 'Roles')
 
 ---
 
-### 11. The `rk.expand_column_list` Function
+### 11. The `rk.extend_column` Function
 
-`rk.expand_column_list(data_frame, col_name_1, col_name_2, col_new_name)`
+`rk.extend_column(data_frame, col_name_1, col_name_2, col_new_name)`
 
 Expand 2 Pandas Series with every element being lists into a single column with lists.
 
@@ -571,7 +571,7 @@ The **new table** is:
 The **code** is:
 
 ```python
-new = rk.expand_column_list(original, 'Roles1', 'Roles2', 'Roles')
+new = rk.extend_column(original, 'Roles1', 'Roles2', 'Roles')
 ```
 
 ---
@@ -687,7 +687,7 @@ print(new)
 
 ---
 
-Get the code of the last version [here](https://github.com/josemariasosa/rubik/blob/master/rubik/rubik.py).
+Get the code of the last version [here](https://github.com/josemariasosa/rubik/blob/master/rubik.py).
 
 ## Versions:
 
