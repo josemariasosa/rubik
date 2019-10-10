@@ -35,16 +35,10 @@ def table(_list):
     """This function works like table() in the R programming language."""
     _list = pd.Series(_list)
     counts = _list.value_counts()
-    my_dict = dict(counts)
-    # Creating a Data Frame.
-    e = {
-        'freq': my_dict.values(),
-        'names': my_dict.keys()
-    } 
-    e = pd.DataFrame(e)
-    # Sorting by frequency.
-    e = e.sort_values('freq', ascending=False).reset_index(drop=True)
-    return e[['names','freq']]
+    counts = counts.rename('freq')
+    counts.index.name = 'values'
+    counts = counts.reset_index(drop=False)
+    return counts
 
 # ------------------------------------------------------------------------------
 
