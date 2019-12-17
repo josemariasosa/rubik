@@ -2,9 +2,9 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 2.0.0: Aug-18-2019
+# Version 2.1.0: Dec-17-2019
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 
 import pandas as pd
 from operator import itemgetter
@@ -81,6 +81,24 @@ def ungroup_dict(data_frame, column_name):
 
 # ------------------------------------------------------------------------------
 
+def list_to_columns(data_frame, column_name):
+    def to_dict(l):
+        if not isinstance(l, list):
+            mess = 'All the values in the column {} must be lists. '
+            mess = mess + 'Try using rubik\'s function fillna_list()'
+            raise ValueError(mess.format(column_name))
+        d = {}
+        for i, v in enumerate(l):
+            d.update({
+                column_name+'_'+str(i+1): v
+            })
+        return d
+    data_frame[column_name] = data_frame[column_name].map(to_dict)
+    data_frame = ungroup_dict(data_frame, column_name)
+    return data_frame
+
+# ------------------------------------------------------------------------------
+
 def groupto_list(data_frame, column_list, column_name):
     """Group a variable (column_name) in to a single list in regards of a
     group of variables (column_list)."""
@@ -92,8 +110,8 @@ def groupto_list(data_frame, column_list, column_name):
 # ------------------------------------------------------------------------------
 
 def groupto_tuple(data_frame, column_list, column_name):
-    """Group a variable (column_name) in to a tuple in regards of a
-    group of variables (column_list)."""
+    """ Group a variable (column_name) in to a tuple in regards of a
+        group of variables (column_list)."""
     return (data_frame.groupby(column_list)[column_name]
                       .apply(lambda x: tuple(x.tolist()))
                       .rename(column_name)
@@ -102,9 +120,9 @@ def groupto_tuple(data_frame, column_list, column_name):
 # ------------------------------------------------------------------------------
 
 def groupto_sorted_tuple(data_frame, column_list, column_name, n=0):
-    """Group a variable (column_name) in to a single tuple in regards of a
-    group of variables (column_list).
-    Sort a list of tuples by first, second, or n element."""
+    """ Group a variable (column_name) in to a single tuple in regards of a
+        group of variables (column_list).
+        Sort a list of tuples by first, second, or n element."""
     aux_fun = lambda x: tuple(sorted(x, key=itemgetter(n)))
     return (data_frame.groupby(column_list)[column_name]
                       .apply(lambda x: aux_fun(x.tolist()))
@@ -114,7 +132,7 @@ def groupto_sorted_tuple(data_frame, column_list, column_name, n=0):
 # ------------------------------------------------------------------------------
 
 def groupto_dict(data_frame, column_list, column_new_name):
-    """Generate new column with dictionaries having values of othe columns."""
+    """ Generate new column with dictionaries having values of othe columns."""
     all_cols = list(data_frame.columns)
     # Remove from the column list the name of the columns that will be grouped.
     for to_rem in column_list:
@@ -128,8 +146,8 @@ def groupto_dict(data_frame, column_list, column_new_name):
 # ------------------------------------------------------------------------------
 
 def groupto_set(data_frame, column_list, column_name):
-    """Group a variable (column_name) in to a single list/set in regards of a
-    group of variables (column_list)."""
+    """ Group a variable (column_name) in to a single list/set in regards of a
+        group of variables (column_list)."""
     return (data_frame.groupby(column_list)[column_name]
                       .apply(lambda x: list(set(x)))
                       .rename(column_name)
@@ -138,8 +156,8 @@ def groupto_set(data_frame, column_list, column_name):
 # ------------------------------------------------------------------------------
 
 def groupto_sorted_set(data_frame, column_list, column_name):
-    """Group a variable (column_name) in to a single list/set in regards of a
-    group of variables (column_list)."""
+    """ Group a variable (column_name) in to a single list/set in regards of a
+        group of variables (column_list)."""
     def aux_fun(x):
         x = list(set(x))
         x.sort()
@@ -153,7 +171,7 @@ def groupto_sorted_set(data_frame, column_list, column_name):
 
 def flat_list(_list):
     """ Flatten a list with nested lists.
-    [100,[103, [555]]], 102] = [100, 103, 555, 102]"""
+        [100,[103, [555]]], 102] = [100, 103, 555, 102]"""
     if not isinstance(_list, list):
         my_list = []
         my_list.append(_list)
@@ -196,17 +214,27 @@ def extend_column(data_frame, col_name_1, col_name_2, col_new_name):
 
 # ------------------------------------------------------------------------------
 
-def chunkify(chunk_this_list, chunk_size):
-    """Create smaller chunks in the same list."""
-    return ([chunk_this_list[x:x+chunk_size]
-            for x in range(0,len(chunk_this_list),chunk_size)])
+def chunkify(chunk_this, chunk_size):
+    """ Create smaller chunks in the same list. If a pandas DataFrame is used
+        then the result is a list of DataFrames."""
+    if isinstance(chunk_this, pd.DataFrame):
+        chunk_this = chunk_this.to_dict(orient='records')
+        return ([pd.DataFrame(chunk_this[x:x+chunk_size])
+                for x in range(0,len(chunk_this),chunk_size)])
+    return ([chunk_this[x:x+chunk_size]
+            for x in range(0,len(chunk_this),chunk_size)])
 
 # ------------------------------------------------------------------------------
 
 
 # Versions:
 
-    """ version - 2.0 'PyCon Latam 2019 - Puerto Vallarta.'
+    """ version - 2.1 'This is the end of a decade.'
+
+            1. New function. Expand a column with a list, into multiple columns.
+            2. Updating function. chunkify receives now a list or a DataFrame.
+
+        version - 2.0 'PyCon Latam 2019 - Puerto Vallarta.'
 
             1. New function names. Again! In compliance with PEP8.
             2. Create the rubik Package for git.
