@@ -7,7 +7,7 @@ setup(
     author_email='jose.skedar@gmail.com',
     py_modules=['rubik'],
     install_requires=['pandas'],
-    version='2.0',
+    version='2.1.0',
     license='MIT',
     description='A set of very useful tools for data wrangling and data processing that could be used with the Python library Pandas.',
     long_description=open('README.md').read()
