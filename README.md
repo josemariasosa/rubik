@@ -1,6 +1,6 @@
 # rubik
 
-A set of very useful tools for data wrangling and data processing that could be used with the Python library Pandas. This tools allows the user to give to a Pandas DataFrame any kind of complex structure, being able to arrange columns and rows as if they were part of a Rubik's cube.
+A set of very useful tools for data wrangling and data processing that could be used with the Python library Pandas. This set of tools allows the user to give to a Pandas DataFrame any kind of complex structure, being able to arrange columns and rows as if they were part of a Rubik's cube.
 
 Share **rubik** with all your panda friends!
 
