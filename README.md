@@ -209,7 +209,7 @@ new = rk.ungroup_list(original, 'Roles')
 
 ### 4. The `rk.ungroup_dict` Function
 
-`rk.ungroup_dict(data_frame, column_name)`
+`rk.ungroup_dict(data_frame, column_name, prefix=False)`
 
 This function flatten a data frame with dictionaries in a column.
 
@@ -219,6 +219,11 @@ This function flatten a data frame with dictionaries in a column.
 data_frame  - The DataFrame we are going to work with.
 
 column_name - A String with the column name we are going to modify.
+
+prefix - Use the prefix argument as follow:
+    - False: default, regular behavior, column names are the dict keys.
+    - True: Use as prefix the original column name followed by an underscore.
+    - String: The user can give any prefix.
 ```
 
 #### 4.2 Example:
@@ -738,11 +743,14 @@ Get the code of the last version [here](https://github.com/josemariasosa/rubik/b
 
 ## Versions:
 
+- version - 2.2 *'Pandemic leisure.'*
+
+    1. Updating function. For `ungroup_dict`, the user may use a prefix for the new columns that will be created.
+
 - version - 2.1 *'This is the end of a decade.'*
 
-    1. New function. Generate a Markdown table from a pandas DataFrame.
-    2. New function. Expand a column with a list, into multiple columns.
-    3. Updating function. chunkify receives now a list or a DataFrame.
+    1. (deleted) New function. Expand a column with a list, into multiple columns.
+    2. Updating function. chunkify receives now a list or a DataFrame.
 
 - version - 2.0. *'PyCon Latam 2019 - Puerto Vallarta.'*
 

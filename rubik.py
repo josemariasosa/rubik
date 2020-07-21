@@ -2,9 +2,9 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 2.1.0: Dec-17-2019
+# Version 2.2.0: Jul-21-2020
 
-__version__ = '2.1.0'
+__version__ = '2.2.0'
 
 import pandas as pd
 from operator import itemgetter
@@ -22,14 +22,14 @@ def fillna_list(data_frame, column_name):
                                           .apply(g_fun))
     return data_frame
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def concat_to_list(data_frame, column_list, column_new_name):
     """Concatenate multiple columns of a data frame into a single list."""
     data_frame[column_new_name] = data_frame[column_list].values.tolist()
     return data_frame.drop(column_list, axis=1)
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def table(_list):
     """This function works like table() in the R programming language."""
@@ -40,7 +40,7 @@ def table(_list):
     counts = counts.reset_index(drop=False)
     return counts
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def ungroup_list(data_frame, column_name):
     """This function unnest a 'Series of Lists' in a Pandas Dataframe."""
@@ -60,17 +60,33 @@ def ungroup_list(data_frame, column_name):
                       .drop(column_name, axis=1)
                       .rename(columns={column_name+'_new':column_name}))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def ungroup_dict(data_frame, column_name):
+def ungroup_dict(data_frame, column_name, prefix=False):
     """This function flatten a DataFrame with dictionaries in a column.
-    Avoid crashing columns names with the dictionary keys."""
+    Avoid crashing columns names with the dictionary keys.
+    Use the prefix argument as follow:
+        - False: default, regular behavior, column names are the dict keys.
+        - True: Use as prefix the original column name followed by an underscore.
+        - String: The user can give any prefix.
+    """
     uncrashable = 'uncrashable_NaMe_XxXxXxXxXxXxXxXxXx'
     data_frame = data_frame.rename(columns={column_name: uncrashable})
     data_frame = data_frame.reset_index(drop=True)
     data_frame.index.name = 'pivot'
     data_frame = data_frame.reset_index(drop=False)
     data_frame_aux = pd.DataFrame(data_frame[uncrashable].tolist())
+
+    if bool(prefix):
+        if isinstance(prefix, str):
+            prefix_name = prefix + '_'
+        else:
+            prefix_name = column_name + '_'
+        new_names = {
+            col: prefix_name+col for col in data_frame_aux.columns.tolist()
+        }
+        data_frame_aux = data_frame_aux.rename(columns=new_names)
+
     data_frame_aux.index.name = 'pivot'
     data_frame_aux = data_frame_aux.reset_index(drop=False)
     # Merge the data_frames.
@@ -79,7 +95,7 @@ def ungroup_dict(data_frame, column_name):
                     how='left',
                     on='pivot').drop([uncrashable, 'pivot'], axis=1)
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def list_to_columns(data_frame, column_name):
     def to_dict(l):
@@ -97,7 +113,7 @@ def list_to_columns(data_frame, column_name):
     data_frame = ungroup_dict(data_frame, column_name)
     return data_frame
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_list(data_frame, column_list, column_name):
     """Group a variable (column_name) in to a single list in regards of a
@@ -107,7 +123,7 @@ def groupto_list(data_frame, column_list, column_name):
                       .rename(column_name)
                       .reset_index(drop=False))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_tuple(data_frame, column_list, column_name):
     """ Group a variable (column_name) in to a tuple in regards of a
@@ -117,7 +133,7 @@ def groupto_tuple(data_frame, column_list, column_name):
                       .rename(column_name)
                       .reset_index(drop=False))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_sorted_tuple(data_frame, column_list, column_name, n=0):
     """ Group a variable (column_name) in to a single tuple in regards of a
@@ -129,7 +145,7 @@ def groupto_sorted_tuple(data_frame, column_list, column_name, n=0):
                       .rename(column_name)
                       .reset_index(drop=False))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_dict(data_frame, column_list, column_new_name):
     """ Generate new column with dictionaries having values of othe columns."""
@@ -143,7 +159,7 @@ def groupto_dict(data_frame, column_list, column_new_name):
                     .rename(column_new_name))
     return pd.concat([no_group_data, group_data], axis=1)
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_set(data_frame, column_list, column_name):
     """ Group a variable (column_name) in to a single list/set in regards of a
@@ -153,7 +169,7 @@ def groupto_set(data_frame, column_list, column_name):
                       .rename(column_name)
                       .reset_index(drop=False))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def groupto_sorted_set(data_frame, column_list, column_name):
     """ Group a variable (column_name) in to a single list/set in regards of a
@@ -167,7 +183,7 @@ def groupto_sorted_set(data_frame, column_list, column_name):
                       .rename(column_name)
                       .reset_index(drop=False))
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def flat_list(_list):
     """ Flatten a list with nested lists.
@@ -194,7 +210,7 @@ def flat_list(_list):
         _list = flattenList(_list)
     return _list
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def extend_column(data_frame, col_name_1, col_name_2, col_new_name):
     data_frame = data_frame.to_dict(orient='records')
@@ -212,7 +228,7 @@ def extend_column(data_frame, col_name_1, col_name_2, col_new_name):
     data_frame = pd.DataFrame(data_frame)
     return data_frame
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def chunkify(chunk_this, chunk_size):
     """ Create smaller chunks in the same list. If a pandas DataFrame is used
@@ -224,14 +240,20 @@ def chunkify(chunk_this, chunk_size):
     return ([chunk_this[x:x+chunk_size]
             for x in range(0,len(chunk_this),chunk_size)])
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 # Versions:
 
-    """ version - 2.1 'This is the end of a decade.'
+    """ version - 2.2 'Pandemic leisure.'
 
-            1. New function. Expand a column with a list, into multiple columns.
+            1. Updating function. For `ungroup_dict`, the user may use a prefix
+                for the new columns that will be created.
+
+        version - 2.1 'This is the end of a decade.'
+
+            1. (deleted) New function. Expand a column with a list, into 
+                multiple columns.
             2. Updating function. chunkify receives now a list or a DataFrame.
 
         version - 2.0 'PyCon Latam 2019 - Puerto Vallarta.'
@@ -257,4 +279,4 @@ def chunkify(chunk_this, chunk_size):
                 Avoid crashing names with the dictionary keys.
 
             2. Adding the chunkify function.
-    """ 
+    """
