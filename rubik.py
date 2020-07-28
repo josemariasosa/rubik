@@ -87,9 +87,10 @@ def ungroup_dict(data_frame, column_name, prefix=False):
     data_frame = data_frame.reset_index(drop=True)
     data_frame.index.name = 'pivot'
     data_frame = data_frame.reset_index(drop=False)
+    mask = data_frame[uncrashable].isnull()
+    data_frame[uncrashable] = data_frame[uncrashable].where(~mask, None)
     data_frame_aux = pd.DataFrame([
-        x if bool(x) and not math.isnan(x) else {}
-        for x in data_frame[uncrashable].tolist()
+        x if bool(x) else {} for x in data_frame[uncrashable].tolist()
     ])
     if bool(prefix):
         if isinstance(prefix, str):
