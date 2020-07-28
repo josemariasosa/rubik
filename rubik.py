@@ -6,7 +6,6 @@
 
 __version__ = '2.2.1'
 
-import math
 import pandas as pd
 from operator import itemgetter
 pd.set_option('display.min_rows', 30)
@@ -262,8 +261,7 @@ def chunkify(chunk_this, chunk_size):
 
     """ version - 2.2.1 'Never stop until the cube is done.'
 
-            1. Fixing edge case for the `ungroup_dict` function using math.
-            https://docs.python.org/3/library/math.html#math.isnan
+            1. Fixing edge case for the `ungroup_dict`.
             2. New function. fillna_dict.
 
         version - 2.2 'Pandemic leisure.'
