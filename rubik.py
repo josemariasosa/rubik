@@ -2,16 +2,28 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 2.2.0: Jul-21-2020
+# Version 2.2.1: Jul-28-2020
 
-__version__ = '2.2.0'
+__version__ = '2.2.1'
 
+import math
 import pandas as pd
 from operator import itemgetter
 pd.set_option('display.min_rows', 30)
 pd.set_option('display.max_rows', 60)
 pd.set_option('display.max_columns', 20)
 
+
+def fillna_dict(data_frame, column_name):
+    """From any column in a DataFrame, replace the NaN values with empty 
+    dictionaries."""
+    g_fun = lambda x: {}
+    mask = data_frame[column_name].isnull()
+    data_frame.loc[mask,[column_name]] = (data_frame.loc[mask,column_name]
+                                          .apply(g_fun))
+    return data_frame
+
+# -----------------------------------------------------------------------------
 
 def fillna_list(data_frame, column_name):
     """From any column in a DataFrame, replace the NaN values with empty 
@@ -76,7 +88,8 @@ def ungroup_dict(data_frame, column_name, prefix=False):
     data_frame.index.name = 'pivot'
     data_frame = data_frame.reset_index(drop=False)
     data_frame_aux = pd.DataFrame([
-        x if bool(x) else {} for x in data_frame[uncrashable].tolist()
+        x if bool(x) and not math.isnan(x) else {}
+        for x in data_frame[uncrashable].tolist()
     ])
     if bool(prefix):
         if isinstance(prefix, str):
@@ -246,7 +259,13 @@ def chunkify(chunk_this, chunk_size):
 
 # Versions:
 
-    """ version - 2.2 'Pandemic leisure.'
+    """ version - 2.2.1 'Never stop until the cube is done.'
+
+            1. Fixing edge case for the `ungroup_dict` function using math.
+            https://docs.python.org/3/library/math.html#math.isnan
+            2. New function. fillna_dict.
+
+        version - 2.2 'Pandemic leisure.'
 
             1. Updating function. For `ungroup_dict`, the user may use a prefix
                 for the new columns that will be created.

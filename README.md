@@ -21,6 +21,7 @@ Share **rubik** with all your panda friends!
 13. [**table()**](https://github.com/josemariasosa/rubik#13-the-rktable-function)
 14. [**flat_list()**](https://github.com/josemariasosa/rubik#14-the-rkflat_list-function)
 15. [**chunkify()**](https://github.com/josemariasosa/rubik#15-the-rkchunkify-function)
+16. [**fillna_dict()**](https://github.com/josemariasosa/rubik#16-the-rkfillna_dict-function)
 
 ## Test and use rubik
 
@@ -739,9 +740,61 @@ print(new)
 
 ---
 
+### 16. The `rk.fillna_dict` Function
+
+`rk.fillna_dict(data_frame, column_name)`
+
+From any column in a DataFrame, replace the NaN values with empty dictionaries.
+
+#### 16.1 Arguments:
+
+```
+data_frame  - The DataFrame we are going to work with.
+
+column_name - A String with the column name we are going to modify.
+```
+
+#### 16.2 Example:
+
+The **original table** is:
+
+| Entry | Id        | Roles     |
+|-------|-----------|-----------|
+| 0     | user-123  | NaN       |
+| 1     | user-452  | NaN       |
+| 2     | user-21   | {'r': 1}  |
+| 3     | user-621  | NaN       |
+| 4     | user-5512 | {'r': 2}  |
+| 5     | user-25   | NaN       |
+
+The **new table** is:
+
+| Entry | Id        | Roles     |
+|-------|-----------|-----------|
+| 0     | user-123  | { }       |
+| 1     | user-452  | [1]       |
+| 2     | user-21   | {'r': 1}  |
+| 3     | user-621  | { }       |
+| 4     | user-5512 | {'r': 2}  |
+| 5     | user-25   | { }       |
+
+The **code** is:
+
+```python
+new = rk.fillna_dict(original, 'Roles')
+```
+
+---
+
 Get the code of the last version [here](https://github.com/josemariasosa/rubik/blob/master/rubik.py).
 
 ## Versions:
+
+- version - 2.2.1 'Never stop until the cube is done.'
+
+    1. Fixing edge case for the `ungroup_dict` function using math.
+    https://docs.python.org/3/library/math.html#math.isnan
+    2. New function. fillna_dict.
 
 - version - 2.2 *'Pandemic leisure.'*
 
