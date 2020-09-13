@@ -790,7 +790,11 @@ Get the code of the last version [here](https://github.com/josemariasosa/rubik/b
 
 ## Versions:
 
-- version - 2.2.1 'Never stop until the cube is done.'
+- version - 2.2.2 *'My guitar is not too loud!'*
+
+    1. Fixing edge case for the `flat_list` function.
+
+- version - 2.2.1 *'Never stop until the cube is done.'*
 
     1. Fixing edge case for the `ungroup_dict` function using math.
     https://docs.python.org/3/library/math.html#math.isnan

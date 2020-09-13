@@ -2,9 +2,9 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 2.2.1: Jul-28-2020
+# Version 2.2.2: Sep-13-2020
 
-__version__ = '2.2.1'
+__version__ = '2.2.2'
 
 import pandas as pd
 from operator import itemgetter
@@ -221,7 +221,7 @@ def flat_list(_list):
             flag = True
     # If more lists are on the list, do a recursive operation.
     if flag:
-        _list = flattenList(_list)
+        _list = flat_list(_list)
     return _list
 
 # -----------------------------------------------------------------------------
@@ -259,7 +259,11 @@ def chunkify(chunk_this, chunk_size):
 
 # Versions:
 
-    """ version - 2.2.1 'Never stop until the cube is done.'
+    """ version - 2.2.2 'My guitar is not too loud!'
+
+            1. Fixing edge case for the `flat_list` function.
+
+        version - 2.2.1 'Never stop until the cube is done.'
 
             1. Fixing edge case for the `ungroup_dict`.
             2. New function. fillna_dict.
