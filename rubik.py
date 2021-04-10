@@ -2,9 +2,9 @@
 # coding=utf-8
 
 # This is Rubik for Pandas, by josé maría.
-# Version 2.2.2: Sep-13-2020
+# Version 2.2.3: Apr-10-2021
 
-__version__ = '2.2.2'
+__version__ = '2.2.3'
 
 import pandas as pd
 from operator import itemgetter
@@ -42,10 +42,10 @@ def concat_to_list(data_frame, column_list, column_new_name):
 
 # -----------------------------------------------------------------------------
 
-def table(_list):
+def table(l):
     """This function works like table() in the R programming language."""
-    _list = pd.Series(_list)
-    counts = _list.value_counts()
+    l = pd.Series(l)
+    counts = l.value_counts()
     counts = counts.rename('freq')
     counts.index.name = 'values'
     counts = counts.reset_index(drop=False)
@@ -199,30 +199,32 @@ def groupto_sorted_set(data_frame, column_list, column_name):
 
 # -----------------------------------------------------------------------------
 
-def flat_list(_list):
+def flat_list(l):
     """ Flatten a list with nested lists.
         [100,[103, [555]]], 102] = [100, 103, 555, 102]"""
-    if not isinstance(_list, list):
+    if isinstance(l, pd.Series):
+        l = l.tolist()
+    if not isinstance(l, list):
         my_list = []
-        my_list.append(_list)
-        _list = my_list
+        my_list.append(l)
+        l = my_list
     # All elements on the list should be lists.
-    for i in range(len(_list)):
-        if not isinstance(_list[i], list):
+    for i in range(len(l)):
+        if not isinstance(l[i], list):
             my_list = []
-            my_list.append(_list[i])
-            _list[i] = my_list
+            my_list.append(l[i])
+            l[i] = my_list
     # Main operation.
-    _list = [item for sublist in _list for item in sublist]
+    l = [item for sublist in l for item in sublist]
     # Review if more lists are nested.
     flag = False
-    for i in range(len(_list)):
-        if isinstance(_list[i], list):
+    for i in range(len(l)):
+        if isinstance(l[i], list):
             flag = True
     # If more lists are on the list, do a recursive operation.
     if flag:
-        _list = flat_list(_list)
-    return _list
+        l = flat_list(l)
+    return l
 
 # -----------------------------------------------------------------------------
 
@@ -255,51 +257,3 @@ def chunkify(chunk_this, chunk_size):
             for x in range(0,len(chunk_this),chunk_size)])
 
 # -----------------------------------------------------------------------------
-
-
-# Versions:
-
-    """ version - 2.2.2 'My guitar is not too loud!'
-
-            1. Fixing edge case for the `flat_list` function.
-
-        version - 2.2.1 'Never stop until the cube is done.'
-
-            1. Fixing edge case for the `ungroup_dict`.
-            2. New function. fillna_dict.
-
-        version - 2.2 'Pandemic leisure.'
-
-            1. Updating function. For `ungroup_dict`, the user may use a prefix
-                for the new columns that will be created.
-
-        version - 2.1 'This is the end of a decade.'
-
-            1. (deleted) New function. Expand a column with a list, into 
-                multiple columns.
-            2. Updating function. chunkify receives now a list or a DataFrame.
-
-        version - 2.0 'PyCon Latam 2019 - Puerto Vallarta.'
-
-            1. New function names. Again! In compliance with PEP8.
-            2. Create the rubik Package for git.
-            3. pip install git+https://github.com/josemariasosa/rubik
-
-        version - 1.3.2. 'New job. New opportunities.'
-
-            1. Displaying a DataFrame in the standard output in a pretty way.
-                - Once the display.max_rows is exceeded, the display.min_rows
-                  options determines how many rows are shown in the truncated
-                  repr.
-
-        version - 1.3.1. 'Just a little bit higher. Not too much.'
-
-            1. Standardizing names and the format.
-
-        version - 1.3. 'I should not be high in classes.'
-            
-            1. Improvements in the flatDict.
-                Avoid crashing names with the dictionary keys.
-
-            2. Adding the chunkify function.
-    """

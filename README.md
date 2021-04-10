@@ -76,7 +76,7 @@ After the Pandas Version 0.23, the used must explicitly specify the number of co
 
 `rk.fillna_list(data_frame, column_name)`
 
-From any column in a DataFrame, replace the NaN values with empty lists.
+From any column in a DataFrame, replace the `NaN` values with empty lists.
 
 #### 1.1 Arguments:
 
@@ -170,7 +170,7 @@ new = rk.concat_to_list(original, ['Role 1', 'Role 2'], 'Roles')
 
 `rk.ungroup_list(data_frame, column_name)`
 
-This function unnest a 'Series of Lists' in a Pandas data frame.
+This function unnest a 'Series of Lists' in a Pandas data frame. Note that the number of columns for the result may increase.
 
 #### 3.1 Arguments:
 
@@ -353,7 +353,7 @@ new = rk.groupto_list(original, ['Entry', 'Id'], 'Roles')
 
 `rk.groupto_tuple(data_frame, column_list, column_name)`
 
-Group a variable (column_name) in to a tuple in regards of a group of variables (column_list).
+Group a variable (column_name) into a tuple in regards of a group of variables (column_list).
 
 #### 7.1 Arguments:
 
@@ -789,6 +789,11 @@ new = rk.fillna_dict(original, 'Roles')
 Get the code of the last version [here](https://github.com/josemariasosa/rubik/blob/master/rubik.py).
 
 ## Versions:
+
+- version - 2.2.3 *'Pareciera ser todo más oscuro acá abajo.'*
+
+    1. `flat_list` is more compatible with Pandas.
+    2. I removed the versions funny names from the code.
 
 - version - 2.2.2 *'My guitar is not too loud!'*
 
