@@ -170,7 +170,9 @@ new = rk.concat_to_list(original, ['Role 1', 'Role 2'], 'Roles')
 
 `rk.ungroup_list(data_frame, column_name)`
 
-This function unnest a 'Series of Lists' in a Pandas data frame. Note that the number of columns for the result may increase.
+This function unnest a 'Series of Lists' in a Pandas data frame.
+
+⚡️ Note that the number of rows for the result may increase.
 
 #### 3.1 Arguments:
 
