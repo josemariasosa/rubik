@@ -55,21 +55,30 @@ def table(l):
 
 def ungroup_list(data_frame, column_name):
     """This function unnest a 'Series of Lists' in a Pandas Dataframe."""
-    index_name = data_frame.index.name
-    data_frame = data_frame.reset_index(drop=True)
-    neededColumnIndex = (data_frame[column_name]
-                        .to_frame()
-                        .reset_index(drop=True))
-    # Do the magic.
-    flat = pd.DataFrame([[i, x] 
-        for i, y in neededColumnIndex[column_name].apply(list).iteritems() 
-            for x in y], columns=[index_name,column_name])
-    flat = flat.set_index(index_name)
-    flat.columns = [column_name + '_new']
-    return (data_frame.join(flat)
-                      .reset_index(drop=True)
-                      .drop(column_name, axis=1)
-                      .rename(columns={column_name+'_new':column_name}))
+    # Ensure the column contains lists
+    data_frame[column_name] = data_frame[column_name].apply(lambda x: x if isinstance(x, list) else [x])
+
+    # Explode the specified column
+    exploded_df = data_frame.explode(column_name)
+
+    return exploded_df.reset_index(drop=True)
+
+    # Legacy code
+    # index_name = data_frame.index.name
+    # data_frame = data_frame.reset_index(drop=True)
+    # neededColumnIndex = (data_frame[column_name]
+    #                     .to_frame()
+    #                     .reset_index(drop=True))
+    # # Do the magic.
+    # flat = pd.DataFrame([[i, x]
+    #     for i, y in neededColumnIndex[column_name].apply(list).iteritems()
+    #         for x in y], columns=[index_name,column_name])
+    # flat = flat.set_index(index_name)
+    # flat.columns = [column_name + '_new']
+    # return (data_frame.join(flat)
+    #                   .reset_index(drop=True)
+    #                   .drop(column_name, axis=1)
+    #                   .rename(columns={column_name+'_new':column_name}))
 
 # -----------------------------------------------------------------------------
 
